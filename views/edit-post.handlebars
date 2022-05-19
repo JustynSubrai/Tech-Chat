@@ -1,35 +1,29 @@
-<article>
-  <a href="/dashboard"> &larr; Back to dashboard</a>
-  <h2>
-    Edit Post
-  </h2>
-  <form class="edit-post-form">
-    <div>
-      <input name="post-title" type="text" value="{{post.title}}" />
-      <span>({{format_url post.post_url}})</span>
-    </div>
-    <div>
-      {{format_plural "point"}} by you on {{format_date post.created_at}}
-      |
-      <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>
-    </div>
-    <button type="submit">Save post</button>
-    <button type="button" class="delete-post-btn">Delete post</button>
-  </form>
+
+<article class="container">
+    <section class="edit-form-page">
+        <div class="form-heading">
+            <h2>
+                Edit Post
+            </h2>
+        </div>
+        <div class="form-section">
+            <form>
+                <div class="form-group mb-5">
+                    <label for="post-title">Title</label>
+                    <input class='form-control btn-outline-info my-2 my-sm-0 bg-dark' type="text" name="post-title" id="post-title" value="{{post.title}}" />
+                </div>
+                <div class="form-group mb-5">
+                    <label for="post-content">Content</label>
+                    <textarea class="form-control btn-outline-info my-2 my-sm-0 bg-dark" id="post-content" name="post-content">{{post.content}}</textarea>
+                </div>
+                <button class='btn btn-outline-info my-2 my-sm-0 mr-5' type="submit">Update post</button>
+                <button class='btn btn-outline-info my-2 my-sm-0 mr-5' type="button" class="delete-post-btn">Delete post</button>
+            </form>
+        </div>
+    </section>
 </article>
 
-<form class="comment-form">
-  <div>
-    <textarea name="comment-body"></textarea>
-  </div>
-
-  <div>
-    <button type="submit">add comment</button>
-  </div>
-</form>
-
-{{> comments post.comments}}
-
+{{#if loggedIn}}
 <script src="/javascript/edit-post.js"></script>
 <script src="/javascript/delete-post.js"></script>
-<script src="/javascript/comment.js"></script>
+{{/if}}
